@@ -13,7 +13,6 @@ import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -24,6 +23,12 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.naming.spi.InitialContextFactory;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import javafx.event.EventHandler;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+
 
 //Logic
 public class Controller{
@@ -31,7 +36,7 @@ public class Controller{
       LINE, POINT, SELECT
     }
 
-    @FXML private Canvas canvas;
+    @FXML private Pane pane;
 
     Mode MODE = Mode.SELECT;
     Deque<Double> POINTS = new LinkedList<Double>();
@@ -43,8 +48,8 @@ public class Controller{
         window = primaryStage;
     }
 
-    public Canvas getCanvas () {
-      return canvas;
+    public Pane getPane () {
+      return pane;
     }
 
     public void modeClick (ActionEvent event) {
@@ -54,16 +59,26 @@ public class Controller{
       System.out.println ("Draw mode changed to \"" + MODE + "\"");
     }
 
-    public void canvasClick (MouseEvent event) {
+    public void paneClick (MouseEvent event) {
       Double point = new Double(event.getX(), event.getY());
       POINTS.addLast(point);
-      System.out.println ("Canvas clicked at " + point.getX() + " " + point.getY());
+      System.out.println ("Pane clicked at " + point.getX() + " " + point.getY());
 
       switch (MODE) {
         case POINT:
           // if (getModel(POINTS.getLast()) == null) {
           //   drawPoint(POINTS.getLast();
           // }
+          Circle c = new Circle(event.getX(), event.getY(), 20);
+          c.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+              @Override
+              public void handle(MouseEvent arg0) {
+                   c.setFill(Color.BLUE);
+              }
+
+          });
+          pane.getChildren().add(c);
           POINTS.clear();
           break;
 
