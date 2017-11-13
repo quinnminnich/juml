@@ -12,51 +12,73 @@ import javafx.scene.Node;
  * @since 0.2
  */
 public class UMLObject {
-  /*
-   * Origin point coordinates.
-   */
-  public double originX;
-  public double originY;
+	/*
+	 * Origin point coordinates.
+	 */
+	public double originX;
+	public double originY;
 
-  /*
-   * Reassign this to given coordinates.
-   * @param newX x coordinate for this to be moved to.
-   * @param newY y coordinate for this to be moved to.
-   * @postcondition This updates all of its data according to new coordinates.
-   */
-  public void move(double newX, double newY) {
-    originX = newX;
-    originY = newY;
-    update();
-  }
+	/*
+	 *  The different types of objects.
+	 */
+	public enum ObjectType {
+		OBJECT, NODE, POINT, CLASSBOX, CONNECTOR
+	}
 
-  /*
-   * Update values to reflect changes made to them.
-   * @postcondition All data is updated (refreshed).
-   */
-  public void update() {}
+	/*
+	 * The type of object this is.
+	 */
+	public ObjectType selfType = ObjectType.OBJECT;
 
-   /*
-    * Returns underlying model.
-    * @return underlying model Node.
-    */
-   public Node getModel() {
-     return null;
-   }
+	/*
+	 * Reassign this to given coordinates.
+	 * 
+	 * @param newX x coordinate for this to be moved to.
+	 * 
+	 * @param newY y coordinate for this to be moved to.
+	 * 
+	 * @postcondition This updates all of its data according to new coordinates.
+	 */
+	public void move(double newX, double newY) {
+		originX = newX;
+		originY = newY;
+		update();
+	}
 
-   /*
-    * Returns origin point x coordinate.
-    * @return Origin x coordinate of this.
-    */
-   public double getOriginX() {
-     return originX;
-   }
+	/*
+	 * Update values to reflect changes made to them.
+	 * 
+	 * @postcondition All data is updated (refreshed).
+	 */
+	public void update() {
+	}
 
-   /*
-    * Returns origin point y coordinate.
-    * @return Origin y coordinate of this.
-    */
-   public double getOriginY() {
-     return originY;
-   }
+	/*
+	 * Returns underlying model.
+	 * 
+	 * @return underlying model Node.
+	 */
+	public Node getModel() {
+		return null;
+	}
+
+	/*
+	 * Returns origin point x coordinate.
+	 * 
+	 * @return Origin x coordinate of this.
+	 */
+	public double getOriginX() {
+		return originX;
+	}
+
+	/*
+	 * Returns origin point y coordinate.
+	 * 
+	 * @return Origin y coordinate of this.
+	 */
+	public double getOriginY() {
+		return originY;
+	}
+
+
 }
